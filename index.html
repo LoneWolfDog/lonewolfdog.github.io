@@ -5,6 +5,81 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" href="Files/jemdoc.css" type="text/css" />
 
+<style>
+    /* 整体简洁配色和排版 */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        color: #333333;
+        line-height: 1.6;
+        background-color: #f4f7f6;
+    }
+
+    /* 页面主体卡片化设计 */
+    #container {
+        background-color: #ffffff;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        border-radius: 10px;
+        padding: 40px 50px;
+        max-width: 960px;
+        margin: 40px auto;
+    }
+
+    /* 一级标题设计 (News, Research Interest, etc.) */
+    h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 8px;
+        margin-top: 40px;
+        font-weight: 600;
+    }
+
+    /* Projects 三段经历的显著分界设计 */
+    h3 {
+        color: #1a365d;
+        background-color: #f0f4f8;
+        padding: 14px 20px;
+        border-left: 6px solid #3498db;
+        border-radius: 0 6px 6px 0;
+        margin-top: 50px;
+        margin-bottom: 20px;
+        font-size: 1.25em;
+        font-weight: bold;
+    }
+
+    /* 二级副标题设计 */
+    h4 {
+        color: #34495e;
+        margin-top: 25px;
+        font-size: 1.1em;
+    }
+
+    /* 优化链接颜色和交互 */
+    a {
+        color: #2980b9;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    a:hover {
+        color: #1a5276;
+        text-decoration: underline;
+    }
+
+    /* 导航栏样式优化 */
+    .staffshortcut a {
+        color: #2c3e50;
+        font-weight: bold;
+        padding: 0 8px;
+    }
+
+    /* 列表间距优化，提升阅读体验 */
+    ul {
+        padding-left: 20px;
+    }
+    li {
+        margin-bottom: 10px;
+    }
+</style>
+
 <title>Yingfeng Chen(陈赢峰)</title>
 </head>
  
@@ -22,7 +97,9 @@
 <br/>
 Leader of Robotic Algorithm Department<br/>
 <a href="https://fuxi.163.com/#/home">Fuxi Robotic in Netease（网易伏羲机器人）</a>
-<br/> 
+<br/>
+<br/>
+Member of CCF Robotics Committee | Hangzhou High-Level Talent (Category C)<br/>
 <br/>
 Location: Netease Building, Wangshang Road 559, Binjiang District, Hangzhou, China<br />
 <class="staffshortcut">
@@ -139,6 +216,27 @@ Some interested papers are listed, visit <a href="https://scholar.google.com/cit
 <br/>
 
 <li>
+Guangyong Chen, Zhaoxin Zhang, Linfeng Cheng, Chenyang Jin, Shen Yao, Yixiang Wang, Rong Xiong, <b>Yingfeng Chen</b><sup>&diams;</sup>,
+“Efficient and robust shoveling control system based on semantic elevation mapping for unmanned loaders,”
+Engineering Applications of Artificial Intelligence(EAAI), 2026.
+</li>
+<p style="text-indent: -1.6rem;margin-left: 0rem;">
+
+<li>
+Zitao Zou, Chuguang Wang, Yujing Hu, Xialiang Liu, Biao Xu, Rong Xiong, Changjie Fan, <b>Yingfeng Chen</b><sup>&diams;</sup>, Yue Wang,
+“High-Precision and High-Efficiency Trajectory Tracking for Excavators Based on Closed-Loop Dynamics,”
+IEEE/RSJ International Conference on Intelligent Robots and Systems(IROS), 2025.
+</li>
+<p style="text-indent: -1.6rem;margin-left: 0rem;">
+
+<li>
+Yanjie Chen, Chuguang Wang, Tianpei Yang, Min Wang, <b>Yingfeng Chen</b>, Jianqiu Zhou, Chen Zhao, Xiaofeng Zhang, ...
+“Mastering Robot Control through Point-based Reinforcement Learning with Pre-training,”
+Proceedings of the 23rd International Conference on Autonomous Agents and Multiagent Systems(AAMAS), 2024.
+</li>
+<p style="text-indent: -1.6rem;margin-left: 0rem;">
+
+<li>
 
 Yuechen Wu<sup>*</sup>, <b>Yingfeng Chen</b><sup>*</sup>, Xiaofei Xie, Bing Yu, Changjie Fan and Lei Ma,
 “"Regression Testing of Massively Multiplayer Online Role-Playing Games,” 
@@ -231,6 +329,11 @@ Proceeding of the IEEE  International Conference on Advanced Robotics(ICAR), 201
 <h3>2021.10~Present: Fuxi Robotic in Netease（网易伏羲机器人）</h3>
 <p><font size="3"><strong>Role: Head of Robotic Algorithms | General Manager & CTO of Netease Lingdong</strong></font></p>
 <p><font size="3">Responsible for the R&D of embodied intelligence algorithms and systems for construction machinery, covering teleoperation, semi-automatic collaboration, unmanned operation, and multi-machine coordinated scheduling.</font></p>
+<p>
+<a href="https://lingdong.fuxi.163.com/" target="_blank">[Product Homepage]</a>
+<a href="javascript:void(0);" onclick="openVideo('Files/Videos/zhuangzaiji.mp4')">[Loader Demo Video]</a>
+<a href="javascript:void(0);" onclick="openVideo('Files/Videos/wajueji.mp4')">[Excavator Demo Video]</a>
+</p>
 <ul>
     <li><font size="3"><b>Advanced Embodied AI Models (VLA/Diffusion Policy):</b> Led the development of an industry-first <b>End-to-End (Sensor-to-Control) Embodied AI Large Model ("Lingjue")</b> for construction machinery.
         <ul>
@@ -354,28 +457,30 @@ Proceeding of the IEEE  International Conference on Advanced Robotics(ICAR), 201
   
   <A NAME="Services"></A></h4>
 <A NAME="Services"><h2>Services</h2></A>
- 
+
 <ul>
-<li><font size="3">AAAI  Member, 2019-Now</font></li>
-<li><font size="3">Program Committe Member of <strong>ICML 2021</strong></font></li>
-<li><font size="3">Program Committee Member of <b>NeurIPS 2020, NeurIPS 2021</b> </font></li>
-<li><font size="3">Program Committee Member of <b>AAAI 2020, AAAI 2021</b> </font></li>
-<li><font size="3">Program Committee Member of <b>IJCAI 2020, IJCAI 2021</b> </font></li>
-<li><font size="3">Program Committee Member of <b>ECAI 2020 </b></font></li>
+<li><font size="3">Executive Committee Member, <b>CCF Intelligent Robotics Professional Committee</b>, 2024-Present</font></li>
+<li><font size="3">Enterprise Mentor, <b>School of Data Science, USTC</b>, 2021-Present</font></li>
+<li><font size="3">Program Committee Member / Reviewer for Top AI & Robotics Conferences (<b>NeurIPS, ICML, AAAI, IJCAI, ICRA, IROS</b>)</font></li>
 </ul>
 
 
 <!-- awards -->
 <A NAME="Awards"><h2>Awards</h2></A>
-<font size="3"> 
+<font size="3">
 <ul>
-<li>Champion of the World Robocup@Home Competition, Brazil, 2015 (The first Asian champion)</li>
-<li>Champion of the China Robocup@Home Open Competition, 2013&2014 </li>
-<li>Outstanding Undergraduate, China University of Petroleum, 2012</li>
-<li>First Prize of Province in the competition of "FreeScale Smart Car", 2011</li>
-<li>National Scholarship, Ministry of Education, 2011</li>
-<li>First-class scholarship, 2009&2010</li>
-
+<li><b>Hangzhou High-Level Talent (Category C)</b>, 2025</li>
+<li><b>Gold Award (1st Place)</b>, Global Digital Trade Innovation Competition, 2025</li>
+<li><b>Top 10 Youth Science and Technology Talents</b>, Binjiang District, 2024</li>
+<li><b>Champion</b>, ICRA RoboDepth Competition, 2023</li>
+<li><b>Global 2nd Place</b>, Google DeepMind Football AI Competition, 2020</li>
+<li><b>Best Paper Award</b>, ASE, 2019</li>
+<li><b>Champion</b> of the Robocup@Benchmarking Service Robots, 2015</li>
+<li><b>Champion</b> of the World Robocup@Home Competition, Brazil (The first Asian champion), 2014</li>
+<li><b>Outstanding Undergraduate</b>, China University of Petroleum, 2012</li>
+<li><b>First Prize</b> of Province in the competition of "FreeScale Smart Car", 2011</li>
+<li><b>National Scholarship</b>, Ministry of Education, 2011</li>
+<li><b>First-class scholarship</b>, 2009&2010</li>
 </ul>
 </font>
  
