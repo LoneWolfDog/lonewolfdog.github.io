@@ -79,6 +79,38 @@
     li {
         margin-bottom: 10px;
     }
+
+    /* 页脚设计：两端对齐，窄屏居中堆叠 */
+    .site-footer {
+        border-top: 1px solid #e0e0e0;
+        margin-top: 40px;
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .site-footer .footer-text {
+        text-align: right;
+        color: #A0A0A0;
+        font-size: 12px;
+        line-height: 1.8;
+    }
+    .site-footer .footer-text a {
+        color: #A0A0A0;
+    }
+    .site-footer .footer-text a:hover {
+        color: #3498db;
+    }
+    @media (max-width: 600px) {
+        .site-footer {
+            justify-content: center;
+        }
+        .site-footer .footer-text {
+            text-align: center;
+        }
+    }
 </style>
 
 <title>Yingfeng Chen(陈赢峰)</title>
@@ -490,17 +522,19 @@ Proceeding of the IEEE  International Conference on Advanced Robotics(ICAR), 201
 
 
  
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5ttoddp8vc1&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
- 
- 
-<font size="2"; color="#A0A0A0";>
-<p style="text-align:center">
-Updating time: 2025.12.15
-<a href="https://beian.miit.gov.cn/" target="_blank"> 备案号:浙ICP备2023022379号-1</a>
-</p>
-<p style="text-align:center">&nbsp;</p>
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ce2b8d76824a443aa1cd001d768bd3d2"}'></script>
+<!-- End Cloudflare Web Analytics -->
 
-</font>
+<div class="site-footer">
+  <a href="https://info.flagcounter.com/3i2n" target="_blank">
+    <img src="https://s05.flagcounter.com/count/3i2n/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0">
+  </a>
+  <div class="footer-text">
+    Updating time: 2025.12.15<br>
+    <a href="https://beian.miit.gov.cn/" target="_blank">备案号:浙ICP备2023022379号-1</a>
+  </div>
+</div>
 
 
 <p>&nbsp;</p>
