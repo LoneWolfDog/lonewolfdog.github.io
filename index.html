@@ -313,23 +313,33 @@
     .site-footer {
         border-top: 1px solid var(--color-border);
         margin-top: 60px;
-        padding: 24px 0;
+        padding: 24px 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .footer-fun-zone {
+        width: 100%;
+    }
+    .footer-bottom {
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         gap: 15px;
+        padding-top: 16px;
+        border-top: 1px solid var(--color-border);
     }
-    .site-footer .footer-text {
+    .footer-text {
         text-align: right;
         color: var(--color-text-tertiary);
         font-size: 12px;
         line-height: 1.8;
     }
-    .site-footer .footer-text a {
+    .footer-text a {
         color: var(--color-text-tertiary);
     }
-    .site-footer .footer-text a:hover {
+    .footer-text a:hover {
         color: var(--color-accent);
     }
 
@@ -350,14 +360,141 @@
             padding: 0 16px;
         }
         .site-footer {
+            gap: 16px;
+        }
+        .footer-bottom {
             justify-content: center;
         }
-        .site-footer .footer-text {
+        .footer-text {
             text-align: center;
         }
         .edu-table td:first-child {
             width: auto;
         }
+        .fun-zone-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    /* ===== Fun Zone ===== */
+    .fun-zone {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        background: var(--color-bg-surface);
+    }
+    .fun-zone-toggle {
+        width: 100%;
+        background: var(--color-bg-page);
+        border: none;
+        padding: 14px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--color-primary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: inherit;
+        transition: background 0.2s;
+    }
+    .fun-zone-toggle:hover {
+        background: var(--color-border);
+    }
+    .fun-zone-icon { font-size: 18px; }
+    .fun-zone-arrow { margin-left: auto; font-size: 12px; }
+    .fun-zone-content { padding: 24px; }
+    .fun-zone-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+    .fun-zone-game h4,
+    .fun-zone-joke h4 {
+        margin-top: 0;
+        margin-bottom: 16px;
+    }
+
+    /* Tic-Tac-Toe */
+    .ttt-board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        width: 180px;
+        margin-bottom: 12px;
+    }
+    .ttt-cell {
+        width: 56px;
+        height: 56px;
+        background: var(--color-bg-page);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.15s;
+        user-select: none;
+    }
+    .ttt-cell:hover:not(.ttt-played) {
+        background: var(--color-border);
+    }
+    .ttt-cell.ttt-played { cursor: default; }
+    .ttt-cell.ttt-x { color: var(--color-primary); }
+    .ttt-cell.ttt-o { color: var(--color-accent); }
+    .ttt-status {
+        font-size: 14px;
+        color: var(--color-text-secondary);
+        margin: 8px 0;
+        min-height: 20px;
+    }
+
+    /* Joke */
+    .joke-display {
+        background: var(--color-bg-page);
+        border-radius: var(--radius-md);
+        padding: 16px;
+        margin-bottom: 12px;
+        min-height: 80px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+        display: flex;
+        align-items: center;
+    }
+
+    .fun-btn {
+        background: var(--color-primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: 8px 16px;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: background 0.2s;
+    }
+    .fun-btn:hover {
+        background: var(--color-accent);
+    }
+
+    /* Click emoji */
+    .click-emoji {
+        position: fixed;
+        font-size: 24px;
+        pointer-events: none;
+        z-index: 9999;
+        animation: emoji-float 1.5s ease-out forwards;
+    }
+    @keyframes emoji-float {
+        0% { opacity: 1; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1.2); }
+        100% { opacity: 0; transform: scale(1) translateY(-60px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .click-emoji { animation: none; opacity: 0.5; }
     }
 </style>
 
@@ -725,12 +862,48 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
 <!-- End Cloudflare Web Analytics -->
 
 <div class="site-footer">
-  <a href="https://info.flagcounter.com/3i2n" target="_blank">
-    <img src="https://s05.flagcounter.com/count/3i2n/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0">
-  </a>
-  <div class="footer-text">
-    <span data-i18n="footer.update">Updating time</span>: 2025.12.15<br>
-    <a href="https://beian.miit.gov.cn/" target="_blank" data-i18n="footer.beian">备案号:浙ICP备2023022379号-1</a>
+
+  <div class="footer-fun-zone" id="fun-zone">
+    <button class="fun-zone-toggle" onclick="toggleFunZone()">
+      <span class="fun-zone-icon">&#127918;</span>
+      <span data-i18n="funzone.title">Fun Zone</span>
+      <span class="fun-zone-arrow" id="funzone-arrow">&#9662;</span>
+    </button>
+    <div class="fun-zone-content" id="funzone-content" style="display:none;">
+      <div class="fun-zone-grid">
+        <div class="fun-zone-game">
+          <h4 data-i18n="funzone.game_title">Tic-Tac-Toe vs AI</h4>
+          <div class="ttt-board" id="ttt-board">
+            <div class="ttt-cell" data-cell="0"></div>
+            <div class="ttt-cell" data-cell="1"></div>
+            <div class="ttt-cell" data-cell="2"></div>
+            <div class="ttt-cell" data-cell="3"></div>
+            <div class="ttt-cell" data-cell="4"></div>
+            <div class="ttt-cell" data-cell="5"></div>
+            <div class="ttt-cell" data-cell="6"></div>
+            <div class="ttt-cell" data-cell="7"></div>
+            <div class="ttt-cell" data-cell="8"></div>
+          </div>
+          <p class="ttt-status" id="ttt-status" data-i18n="funzone.ttt_your_turn">Your turn (X)</p>
+          <button class="fun-btn" onclick="resetTicTacToe()" data-i18n="funzone.new_game">New Game</button>
+        </div>
+        <div class="fun-zone-joke">
+          <h4 data-i18n="funzone.joke_title">Daily Chuckle</h4>
+          <div class="joke-display" id="joke-display"></div>
+          <button class="fun-btn" onclick="showJoke()" data-i18n="funzone.next_joke">Next joke</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <a href="https://info.flagcounter.com/3i2n" target="_blank">
+      <img src="https://s05.flagcounter.com/count/3i2n/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0">
+    </a>
+    <div class="footer-text">
+      <span data-i18n="footer.update">Updating time</span>: 2025.12.15<br>
+      <a href="https://beian.miit.gov.cn/" target="_blank" data-i18n="footer.beian">备案号:浙ICP备2023022379号-1</a>
+    </div>
   </div>
 </div>
 
@@ -851,7 +1024,18 @@ const translations = {
         'awards.li12': '<b>First-class scholarship</b>, 2009&amp;2010',
 
         'footer.update': 'Updating time',
-        'footer.beian': '备案号:浙ICP备2023022379号-1'
+        'footer.beian': '备案号:浙ICP备2023022379号-1',
+
+        'funzone.title': 'Fun Zone',
+        'funzone.game_title': 'Tic-Tac-Toe vs AI',
+        'funzone.ttt_your_turn': 'Your turn (X)',
+        'funzone.ttt_ai_turn': 'AI thinking...',
+        'funzone.ttt_win': 'You win! 🎉',
+        'funzone.ttt_lose': 'AI wins! 🤖',
+        'funzone.ttt_draw': 'Draw! 🤝',
+        'funzone.new_game': 'New Game',
+        'funzone.joke_title': 'Daily Chuckle',
+        'funzone.next_joke': 'Next joke'
     },
     zh: {
         'nav.news': '最新动态',
@@ -960,7 +1144,18 @@ const translations = {
         'awards.li12': '<b>一等奖学金</b>，2009&amp;2010',
 
         'footer.update': '更新时间',
-        'footer.beian': '备案号:浙ICP备2023022379号-1'
+        'footer.beian': '备案号:浙ICP备2023022379号-1',
+
+        'funzone.title': '趣味角落',
+        'funzone.game_title': '井字棋（人机对战）',
+        'funzone.ttt_your_turn': '该你了（X）',
+        'funzone.ttt_ai_turn': 'AI 思考中...',
+        'funzone.ttt_win': '你赢了！🎉',
+        'funzone.ttt_lose': 'AI 赢了！🤖',
+        'funzone.ttt_draw': '平局！🤝',
+        'funzone.new_game': '新一局',
+        'funzone.joke_title': '每日一笑',
+        'funzone.next_joke': '换一个'
     }
 };
 
@@ -1002,6 +1197,16 @@ function applyLang(lang) {
         }
     }
 
+    var tttStatus = document.getElementById('ttt-status');
+    if (tttStatus && !tttGameOver) {
+        tttStatus.textContent = t('funzone.ttt_your_turn');
+    }
+
+    var jokeDisplay = document.getElementById('joke-display');
+    if (jokeDisplay && jokeDisplay.textContent) {
+        showJoke();
+    }
+
     syncUrlLang(currentLang);
 }
 
@@ -1040,6 +1245,252 @@ function syncUrlLang(lang) {
         try { localStorage.setItem(I18N_KEY, urlLang); } catch(e) {}
     }
 })();
+</script>
+
+<script>
+/* ===== Fun Zone: Tic-Tac-Toe ===== */
+var tttBoard = ['','','','','','','','',''];
+var tttGameOver = false;
+
+function tttCheckWin(b, p) {
+    var lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    for (var i = 0; i < lines.length; i++) {
+        if (b[lines[i][0]] === p && b[lines[i][1]] === p && b[lines[i][2]] === p) return true;
+    }
+    return false;
+}
+
+function tttCheckDraw(b) {
+    return b.every(function(c) { return c !== ''; });
+}
+
+function tttGetEmpty(b) {
+    var empty = [];
+    for (var i = 0; i < 9; i++) { if (b[i] === '') empty.push(i); }
+    return empty;
+}
+
+function tttMinimax(b, isAI) {
+    if (tttCheckWin(b, 'O')) return 10;
+    if (tttCheckWin(b, 'X')) return -10;
+    if (tttCheckDraw(b)) return 0;
+
+    if (isAI) {
+        var best = -Infinity;
+        var empty = tttGetEmpty(b);
+        for (var i = 0; i < empty.length; i++) {
+            b[empty[i]] = 'O';
+            var score = tttMinimax(b, false);
+            b[empty[i]] = '';
+            if (score > best) best = score;
+        }
+        return best;
+    } else {
+        var best2 = Infinity;
+        var empty2 = tttGetEmpty(b);
+        for (var j = 0; j < empty2.length; j++) {
+            b[empty2[j]] = 'X';
+            var score2 = tttMinimax(b, true);
+            b[empty2[j]] = '';
+            if (score2 < best2) best2 = score2;
+        }
+        return best2;
+    }
+}
+
+function tttAIMove() {
+    var bestScore = -Infinity;
+    var bestMove = -1;
+    var empty = tttGetEmpty(tttBoard);
+    for (var i = 0; i < empty.length; i++) {
+        tttBoard[empty[i]] = 'O';
+        var score = tttMinimax(tttBoard, false);
+        tttBoard[empty[i]] = '';
+        if (score > bestScore) { bestScore = score; bestMove = empty[i]; }
+    }
+    return bestMove;
+}
+
+function tttUpdateStatus() {
+    var status = document.getElementById('ttt-status');
+    if (tttGameOver) return;
+    var msgKey = tttCheckWin(tttBoard, 'O') ? 'funzone.ttt_lose' :
+                 tttCheckWin(tttBoard, 'X') ? 'funzone.ttt_win' :
+                 tttCheckDraw(tttBoard) ? 'funzone.ttt_draw' : 'funzone.ttt_your_turn';
+    if (msgKey === 'funzone.ttt_your_turn' || msgKey === 'funzone.ttt_ai_turn') {
+        status.textContent = t(msgKey);
+    } else {
+        status.textContent = t(msgKey);
+        tttGameOver = true;
+    }
+}
+
+function tttPlayerMove(cellIdx) {
+    if (tttGameOver || tttBoard[cellIdx] !== '') return;
+    tttBoard[cellIdx] = 'X';
+    tttRenderCell(cellIdx, 'X');
+    if (tttCheckWin(tttBoard, 'X') || tttCheckDraw(tttBoard)) {
+        tttUpdateStatus();
+        return;
+    }
+    document.getElementById('ttt-status').textContent = t('funzone.ttt_ai_turn');
+    setTimeout(function() {
+        var aiMove = tttAIMove();
+        if (aiMove >= 0) {
+            tttBoard[aiMove] = 'O';
+            tttRenderCell(aiMove, 'O');
+        }
+        tttUpdateStatus();
+    }, 400);
+}
+
+function tttRenderCell(idx, player) {
+    var cell = document.querySelector('[data-cell="' + idx + '"]');
+    cell.textContent = player;
+    cell.classList.add('ttt-played', 'ttt-' + player.toLowerCase());
+}
+
+function resetTicTacToe() {
+    tttBoard = ['','','','','','','','',''];
+    tttGameOver = false;
+    document.querySelectorAll('.ttt-cell').forEach(function(c) {
+        c.textContent = '';
+        c.classList.remove('ttt-played', 'ttt-x', 'ttt-o');
+    });
+    document.getElementById('ttt-status').textContent = t('funzone.ttt_your_turn');
+}
+
+document.querySelectorAll('.ttt-cell').forEach(function(cell) {
+    cell.addEventListener('click', function() {
+        tttPlayerMove(parseInt(this.getAttribute('data-cell')));
+    });
+});
+
+/* ===== Fun Zone: Jokes ===== */
+var jokesData = {
+    en: [
+        'Why do programmers prefer dark mode? Because light attracts bugs.',
+        'There are only 10 types of people in the world: those who understand binary and those who don\'t.',
+        'A SQL query walks into a bar, walks up to two tables and asks: "Can I join you?"',
+        'Why did the robot go to the bank? To change its bytes into cash!',
+        'How many programmers does it take to change a light bulb? None — that\'s a hardware problem.',
+        'Debugging: being the detective in a crime movie where you are also the murderer.',
+        'Why do Java developers wear glasses? Because they don\'t C#.',
+        'I would tell you a UDP joke, but you might not get it.',
+        'Why did the neural network cross the road? To minimize the loss function on the other side.',
+        'A robot walks into a bar and says "I\'ll have a drink, please." The bartender says "We don\'t serve robots." The robot replies "That\'s fine, I just came for the cache."'
+    ],
+    zh: [
+        '为什么程序员喜欢暗色模式？因为光会吸引 bug。',
+        '世界上只有 10 种人：懂二进制的和不懂的。',
+        '一条 SQL 查询走进酒吧，走到两张桌子前问："我能 join 你们吗？"',
+        '机器人为什么去银行？要把 bytes 换成现金！',
+        '换一个灯泡需要几个程序员？零个——那是硬件问题。',
+        '调试代码：你是侦探电影里的侦探，同时你也是凶手。',
+        '为什么 Java 程序员戴眼镜？因为他们不 C#。',
+        '我想给你讲一个 UDP 的笑话，但你可能收不到。',
+        '神经网络为什么过马路？为了最小化另一边的损失函数。',
+        '机器人走进酒吧说"来杯酒"。酒保说"我们不接待机器人"。机器人说"没关系，我只是来 flush cache 的"。'
+    ]
+};
+
+var currentJokeIdx = -1;
+function showJoke() {
+    var jokes = jokesData[currentLang] || jokesData.en;
+    var idx;
+    do { idx = Math.floor(Math.random() * jokes.length); } while (idx === currentJokeIdx && jokes.length > 1);
+    currentJokeIdx = idx;
+    document.getElementById('joke-display').textContent = jokes[idx];
+}
+
+/* ===== Fun Zone: Toggle ===== */
+function toggleFunZone() {
+    var content = document.getElementById('funzone-content');
+    var arrow = document.getElementById('funzone-arrow');
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        arrow.innerHTML = '&#9652;';
+        showJoke();
+    } else {
+        content.style.display = 'none';
+        arrow.innerHTML = '&#9662;';
+    }
+}
+
+/* ===== Easter Egg: Click to scatter emoji ===== */
+var clickEmojis = ['\u2699\uFE0F', '\u{1F916}', '\u{1F527}', '\u{1F4AA}', '\u{1F680}'];
+
+document.addEventListener('click', function(e) {
+    if (e.target.closest('#fun-zone')) return;
+    if (e.target.closest('.navbar')) return;
+    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+
+    var span = document.createElement('span');
+    span.className = 'click-emoji';
+    span.textContent = clickEmojis[Math.floor(Math.random() * clickEmojis.length)];
+    span.style.left = (e.clientX - 12) + 'px';
+    span.style.top = (e.clientY - 12) + 'px';
+    document.body.appendChild(span);
+    setTimeout(function() { if (span.parentNode) span.parentNode.removeChild(span); }, 1500);
+});
+
+/* ===== Easter Egg: Press C to clear emoji ===== */
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'c' || e.key === 'C') {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        document.querySelectorAll('.click-emoji').forEach(function(el) {
+            el.remove();
+        });
+    }
+});
+
+/* ===== Easter Egg: Konami Code ===== */
+var konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+var konamiIdx = 0;
+var konamiActive = false;
+
+document.addEventListener('keydown', function(e) {
+    var key = e.key;
+    if (key === konamiSequence[konamiIdx].toLowerCase() || key === konamiSequence[konamiIdx]) {
+        konamiIdx++;
+        if (konamiIdx === konamiSequence.length) {
+            konamiIdx = 0;
+            triggerKonami();
+        }
+    } else {
+        konamiIdx = 0;
+    }
+});
+
+function triggerKonami() {
+    if (konamiActive) return;
+    konamiActive = true;
+
+    var title = document.querySelector('.header-info h1');
+    var originalTitle = title.textContent;
+    title.innerHTML = '\u{1F916} ' + originalTitle + ' \u2699\uFE0F';
+
+    var burstEmojis = ['\u{1F916}', '\u2699\uFE0F', '\u{1F527}', '\u{1F680}', '\u{1F4AA}', '\u{2B50}', '\u{1F389}'];
+    for (var i = 0; i < 50; i++) {
+        (function(idx) {
+            setTimeout(function() {
+                var span = document.createElement('span');
+                span.className = 'click-emoji';
+                span.style.fontSize = (20 + Math.random() * 20) + 'px';
+                span.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+                span.style.left = Math.random() * window.innerWidth + 'px';
+                span.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(span);
+                setTimeout(function() { if (span.parentNode) span.parentNode.removeChild(span); }, 1500);
+            }, idx * 50);
+        })(i);
+    }
+
+    setTimeout(function() {
+        title.textContent = originalTitle;
+        konamiActive = false;
+    }, 5000);
+}
 </script>
 
 </body>
