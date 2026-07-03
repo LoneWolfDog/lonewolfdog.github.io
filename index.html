@@ -58,6 +58,7 @@
         margin: 0 auto;
         padding: 0 32px;
         display: flex;
+        align-items: center;
         gap: 4px;
         overflow-x: auto;
         white-space: nowrap;
@@ -76,6 +77,23 @@
         background: rgba(255,255,255,0.08);
         border-bottom-color: var(--color-accent);
         text-decoration: none;
+    }
+    .navbar .spacer { flex: 1; }
+    .lang-toggle {
+        background: rgba(255,255,255,0.12);
+        color: #ffffff;
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: var(--radius-sm);
+        padding: 5px 14px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: inherit;
+        transition: background 0.2s;
+        white-space: nowrap;
+    }
+    .lang-toggle:hover {
+        background: rgba(255,255,255,0.22);
     }
 
     a.anchor {
@@ -352,13 +370,15 @@
 
 <nav class="navbar">
   <div class="navbar-inner">
-    <a href="#News">News</a>
-    <a href="#Interest">Research Interest</a>
-    <a href="#Education">Education</a>
-    <a href="#Publications">Publications</a>
-    <a href="#Projects">Projects</a>
-    <a href="#Services">Services</a>
-    <a href="#Awards">Awards</a>
+    <a href="#News" data-i18n="nav.news">News</a>
+    <a href="#Interest" data-i18n="nav.interest">Research Interest</a>
+    <a href="#Education" data-i18n="nav.education">Education</a>
+    <a href="#Publications" data-i18n="nav.publications">Publications</a>
+    <a href="#Projects" data-i18n="nav.projects">Projects</a>
+    <a href="#Services" data-i18n="nav.services">Services</a>
+    <a href="#Awards" data-i18n="nav.awards">Awards</a>
+    <span class="spacer"></span>
+    <button type="button" class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">中</button>
   </div>
 </nav>
 
@@ -371,12 +391,12 @@
   </div>
   <div class="header-info">
     <h1>Yingfeng Chen (陈赢峰)</h1>
-    <p class="title">Leader of Robotic Algorithm Department</p>
-    <p class="affiliation"><a href="https://fuxi.163.com/#/home">Fuxi Robotic in Netease（网易伏羲机器人）</a></p>
-    <p class="meta">Member of CCF Robotics Committee | Hangzhou High-Level Talent (Category C)</p>
-    <p class="location">Location: Netease Building, Wangshang Road 559, Binjiang District, Hangzhou, China</p>
+    <p class="title" data-i18n="header.title">Leader of Robotic Algorithm Department</p>
+    <p class="affiliation"><a href="https://fuxi.163.com/#/home" data-i18n="header.affiliation">Fuxi Robotic in Netease（网易伏羲机器人）</a></p>
+    <p class="meta" data-i18n="header.meta">Member of CCF Robotics Committee | Hangzhou High-Level Talent (Category C)</p>
+    <p class="location" data-i18n="header.location">Location: Netease Building, Wangshang Road 559, Binjiang District, Hangzhou, China</p>
     <div class="contact-links">
-      Email: yingfengchen2016@163.com<br />
+      <span data-i18n="header.email_label">Email</span>: yingfengchen2016@163.com<br />
       [<a href="https://scholar.google.com/citations?user=SSBrkpMAAAAJ&hl=en" target="_blank">Google Scholar</a>]
       [<a href="https://github.com/NeteaseFuxiRL/" target="_blank">Team Github</a>]
       [<a href="https://space.bilibili.com/4801051?from=search&seid=13363899633421111819" target="_blank">B站视频分享</a>]
@@ -386,7 +406,7 @@
 </div>
 
 
-<A NAME="News"><h2>News</h2></A>
+<A NAME="News"><h2 data-i18n="news.title">News</h2></A>
 
 <ul class="news-list">
 <li><span class="news-date">[2021.08.18]</span> The Fuxi Robotics Department was established today. I will start a new exploration of AI and Robotics.</li>
@@ -411,77 +431,75 @@
 <li><span class="news-date">[2019.11.11]</span> Two regular papers and one workshop paper were accepted by <strong>AAAI 2020</strong>.</li>
 </ul>
 </div>
-<button class="news-toggle" onclick="toggleNews()">Show more news &#9662;</button>
+<button class="news-toggle" onclick="toggleNews()" data-i18n="news.toggle_more">Show more news &#9662;</button>
 <script>
 function toggleNews() {
     var more = document.getElementById('news-more');
     var btn = document.querySelector('.news-toggle');
     if (more.classList.contains('news-collapsed')) {
         more.classList.remove('news-collapsed');
-        btn.innerHTML = 'Show less news &#9652;';
+        btn.innerHTML = (currentLang === 'zh' ? '收起 &#9652;' : 'Show less news &#9652;');
     } else {
         more.classList.add('news-collapsed');
-        btn.innerHTML = 'Show more news &#9662;';
+        btn.innerHTML = (currentLang === 'zh' ? '展开更多 &#9662;' : 'Show more news &#9662;');
     }
 }
 </script>
 
 
-<A NAME="Interest"><h2>Research Interest</h2></A>
-My research interests lie at the intersection of <b>Robotics, Reinforcement Learning, and Embodied AI</b>. I am dedicated to building intelligent systems that can perceive, reason, and act in complex real-world environments.
-<br/>
+<A NAME="Interest"><h2 data-i18n="interest.title">Research Interest</h2></A>
+<p data-i18n-html="interest.intro">My research interests lie at the intersection of <b>Robotics, Reinforcement Learning, and Embodied AI</b>. I am dedicated to building intelligent systems that can perceive, reason, and act in complex real-world environments.</p>
 <br/>
 
-<b>Embodied AI &amp; Robotics (Current Focus)</b><br/>
-Currently, I am leading the research on embodied intelligence for construction machinery and general-purpose robots, focusing on end-to-end learning and large-scale data-driven approaches.
+<p data-i18n-html="interest.embodied_title"><b>Embodied AI &amp; Robotics (Current Focus)</b></p>
+<p data-i18n="interest.embodied_desc">Currently, I am leading the research on embodied intelligence for construction machinery and general-purpose robots, focusing on end-to-end learning and large-scale data-driven approaches.</p>
 <ul>
-<li><b>Embodied Foundation Models:</b> Vision-Language-Action (VLA) models, Diffusion Policy, and End-to-End (Sensor-to-Control) learning.</li>
-<li><b>Sim2Real Transfer:</b> Bridging the reality gap via domain randomization, system identification, and residual policies.</li>
-<li><b>Data-Driven Robotics:</b> Large-scale data closed-loop systems, imitation learning from expert demonstrations, and human-in-the-loop learning.</li>
-<li><b>Robotic Systems:</b> Teleoperation, SLAM, multi-sensor fusion, and robust control for unmanned operation.</li>
+<li data-i18n-html="interest.embodied_li1"><b>Embodied Foundation Models:</b> Vision-Language-Action (VLA) models, Diffusion Policy, and End-to-End (Sensor-to-Control) learning.</li>
+<li data-i18n-html="interest.embodied_li2"><b>Sim2Real Transfer:</b> Bridging the reality gap via domain randomization, system identification, and residual policies.</li>
+<li data-i18n-html="interest.embodied_li3"><b>Data-Driven Robotics:</b> Large-scale data closed-loop systems, imitation learning from expert demonstrations, and human-in-the-loop learning.</li>
+<li data-i18n-html="interest.embodied_li4"><b>Robotic Systems:</b> Teleoperation, SLAM, multi-sensor fusion, and robust control for unmanned operation.</li>
 </ul>
 
-<b>Deep Reinforcement Learning &amp; Game AI</b><br/>
-Previously at Fuxi AI Lab, I led the Game AI research, focusing on applying Deep Reinforcement Learning (DRL) to complex game environments and building large-scale distributed training frameworks.
+<p data-i18n-html="interest.drl_title"><b>Deep Reinforcement Learning &amp; Game AI</b></p>
+<p data-i18n="interest.drl_desc">Previously at Fuxi AI Lab, I led the Game AI research, focusing on applying Deep Reinforcement Learning (DRL) to complex game environments and building large-scale distributed training frameworks.</p>
 <ul>
-<li><b>Deep Reinforcement Learning:</b> High-efficient, transferable, and explainable DRL; Distributed reinforcement learning frameworks.</li>
-<li><b>Multi-Agent Learning:</b> Cooperation and competition in large-scale multi-agent environments; Population-based training (PBT).</li>
-<li><b>Game AI Applications:</b> Automated game testing, intelligent NPC behaviors, and procedural content generation.</li>
+<li data-i18n-html="interest.drl_li1"><b>Deep Reinforcement Learning:</b> High-efficient, transferable, and explainable DRL; Distributed reinforcement learning frameworks.</li>
+<li data-i18n-html="interest.drl_li2"><b>Multi-Agent Learning:</b> Cooperation and competition in large-scale multi-agent environments; Population-based training (PBT).</li>
+<li data-i18n-html="interest.drl_li3"><b>Game AI Applications:</b> Automated game testing, intelligent NPC behaviors, and procedural content generation.</li>
 </ul>
 
-<b>Service Robots (Ph.D. Research)</b><br/>
-During my graduate studies at USTC, I worked on the KeJia service robot project, focusing on the full stack of autonomous navigation — from large-scale mapping and robust localization to human-aware planning and real-world deployment in public environments.
+<p data-i18n-html="interest.service_title"><b>Service Robots (Ph.D. Research)</b></p>
+<p data-i18n="interest.service_desc">During my graduate studies at USTC, I worked on the KeJia service robot project, focusing on the full stack of autonomous navigation — from large-scale mapping and robust localization to human-aware planning and real-world deployment in public environments.</p>
 <ul>
-<li><b>Large-Scale SLAM:</b> Probabilistic quadtree map representation with Rao-Blackwellized particle filter SLAM, reducing memory by ~71% for large-scale environments (validated up to 23,700 m²).</li>
-<li><b>Robust Localization:</b> Strategy-switching Monte Carlo Localization adaptive to crowded scenes, with odometry calibration via motion capture (closed-loop error &lt; 2.5%).</li>
-<li><b>Human-Aware Navigation:</b> Three-layer planning with human-aware DWA fusing pedestrian prediction, enabling safe navigation in dense crowds.</li>
-<li><b>Integrated Service Robot System:</b> Deployment of KeJia as China's first shopping mall guide robot (40-day field trial); RoboCup@Home 2014 champion (first Asian champion) with integrated task planning and multi-modal interaction.</li>
+<li data-i18n-html="interest.service_li1"><b>Large-Scale SLAM:</b> Probabilistic quadtree map representation with Rao-Blackwellized particle filter SLAM, reducing memory by ~71% for large-scale environments (validated up to 23,700 m²).</li>
+<li data-i18n-html="interest.service_li2"><b>Robust Localization:</b> Strategy-switching Monte Carlo Localization adaptive to crowded scenes, with odometry calibration via motion capture (closed-loop error &lt; 2.5%).</li>
+<li data-i18n-html="interest.service_li3"><b>Human-Aware Navigation:</b> Three-layer planning with human-aware DWA fusing pedestrian prediction, enabling safe navigation in dense crowds.</li>
+<li data-i18n-html="interest.service_li4"><b>Integrated Service Robot System:</b> Deployment of KeJia as China's first shopping mall guide robot (40-day field trial); RoboCup@Home 2014 champion (first Asian champion) with integrated task planning and multi-modal interaction.</li>
 </ul>
 <br/>
-<A NAME="Education"><h2>Education</h2></A>
+<A NAME="Education"><h2 data-i18n="education.title">Education</h2></A>
 
 <table class="edu-table">
   <tr>
     <td>2022.08-2024.08</td>
-    <td>Postdoc in Control Science and Engineering, <a href="http://www.cse.zju.edu.cn/english/">Zhejiang University (ZJU)</a></td>
-    <td>Supervisor: Prof. <a href="https://person.zju.edu.cn/rongxiong#0">Rong Xiong</a></td>
+    <td data-i18n-html="education.phd_postdoc">Postdoc in Control Science and Engineering, <a href="http://www.cse.zju.edu.cn/english/">Zhejiang University (ZJU)</a></td>
+    <td data-i18n-html="education.phd_postdoc_sup">Supervisor: Prof. <a href="https://person.zju.edu.cn/rongxiong#0">Rong Xiong</a></td>
   </tr>
   <tr>
     <td>2012.09-2017.07</td>
-    <td>Ph.D in <a href="https://ai.ustc.edu.cn/main.htm">Robotics Lab</a>, University of Science and Technology of China(USTC)</td>
-    <td>Supervisor: Prof. <a href="https://cs.ustc.edu.cn/_t1744/2020/0828/c23235a460075/page.psp">Xiaoping Chen</a></td>
+    <td data-i18n-html="education.phd">Ph.D in <a href="https://ai.ustc.edu.cn/main.htm">Robotics Lab</a>, University of Science and Technology of China(USTC)</td>
+    <td data-i18n-html="education.phd_sup">Supervisor: Prof. <a href="https://cs.ustc.edu.cn/_t1744/2020/0828/c23235a460075/page.psp">Xiaoping Chen</a></td>
   </tr>
   <tr>
     <td>2008.09-2012.07</td>
-    <td>B.E. in Computer Science, China University of Petroleum (UPC)</td>
+    <td data-i18n="education.be">B.E. in Computer Science, China University of Petroleum (UPC)</td>
     <td>&nbsp;</td>
   </tr>
 </table>
 
-<A NAME="Publications"><h2>Publications</h2>
+<A NAME="Publications"><h2 data-i18n="publications.title">Publications</h2>
 </A>
-Some interested papers are listed, visit <a href="https://scholar.google.com/citations?user=SSBrkpMAAAAJ&hl=en" target="_blank">Google Scholar</a> for completed publications.
-<br/>
+<p data-i18n-html="publications.intro">Some interested papers are listed, visit <a href="https://scholar.google.com/citations?user=SSBrkpMAAAAJ&hl=en" target="_blank">Google Scholar</a> for completed publications.</p>
 <br/>
 
 <ul class="pub-list">
@@ -553,50 +571,50 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
 </ul>
 
 
-<A NAME="Projects"><h2>Projects</h2></A>
+<A NAME="Projects"><h2 data-i18n="projects.title">Projects</h2></A>
 
-<h3>2021.10~Present: Fuxi Robotic in Netease（网易伏羲机器人）</h3>
-<p><strong>Role: Head of Robotic Algorithms | General Manager &amp; CTO of Netease Lingdong</strong></p>
-<p>Responsible for the R&amp;D of embodied intelligence algorithms and systems for construction machinery, covering teleoperation, semi-automatic collaboration, unmanned operation, and multi-machine coordinated scheduling.</p>
+<h3 data-i18n="projects.netease_title">2021.10~Present: Fuxi Robotic in Netease（网易伏羲机器人）</h3>
+<p data-i18n-html="projects.netease_role"><strong>Role: Head of Robotic Algorithms | General Manager &amp; CTO of Netease Lingdong</strong></p>
+<p data-i18n="projects.netease_desc">Responsible for the R&amp;D of embodied intelligence algorithms and systems for construction machinery, covering teleoperation, semi-automatic collaboration, unmanned operation, and multi-machine coordinated scheduling.</p>
 <p>
-<a href="https://lingdong.fuxi.163.com/" target="_blank">[Product Homepage]</a>
-<a href="javascript:void(0);" onclick="openVideo('Files/Videos/zhuangzaiji.mp4')">[Loader Demo Video]</a>
-<a href="javascript:void(0);" onclick="openVideo('Files/Videos/wajueji.mp4')">[Excavator Demo Video]</a>
+<a href="https://lingdong.fuxi.163.com/" target="_blank" data-i18n="projects.product_home">[Product Homepage]</a>
+<a href="javascript:void(0);" onclick="openVideo('Files/Videos/zhuangzaiji.mp4')" data-i18n="projects.loader_demo">[Loader Demo Video]</a>
+<a href="javascript:void(0);" onclick="openVideo('Files/Videos/wajueji.mp4')" data-i18n="projects.excavator_demo">[Excavator Demo Video]</a>
 </p>
 <ul>
-    <li><b>Advanced Embodied AI Models (VLA/Diffusion Policy):</b> Led the development of an industry-first <b>End-to-End (Sensor-to-Control) Embodied AI Large Model ("Lingjue")</b> for construction machinery.
-        <ul>
-            <li>Incorporated <b>VLA (Vision-Language-Action)</b> architecture and Transformer sequence modeling for direct multi-modal input to action prediction.</li>
-            <li>Combined <b>Diffusion Policy</b> with flow matching to achieve <b>L4-level autonomous operation</b> (e.g., automatic loading) in complex open-pit mine scenarios, realizing zero-intervention operation in a significant portion of the duty cycle.</li>
-            <li>Achieved <b>cross-brand generalization</b> (software-defined hardware) and overcame nonlinear control challenges in hydraulic systems.</li>
-        </ul>
-    </li>
-    <li><b>Large-Scale Data Closed-Loop &amp; Training Platform:</b> Built a comprehensive embodied intelligence training framework and data closed-loop system.
-        <ul>
-            <li>Designed a <b>"Video &rarr; Expert &rarr; RL" three-stage training paradigm</b>.</li>
-            <li>Implemented a high-efficiency data pipeline supporting <b>300TB+/month</b> of multi-modal data flow for continuous model iteration.</li>
-        </ul>
-    </li>
-    <li><b>System &amp; Commercialization:</b> Developed key remote control technologies (low-latency video, data collection) and led the deployment of <b>unmanned loaders and intelligent excavators</b> (SLAM, multi-sensor fusion, planning, control) for <b>24-hour "dark site" operations</b>. Achieved significant commercial success and widespread deployment across multiple provinces in cooperation with major state-owned enterprises.</li>
+<li data-i18n-html="projects.netease_li1"><b>Advanced Embodied AI Models (VLA/Diffusion Policy):</b> Led the development of an industry-first <b>End-to-End (Sensor-to-Control) Embodied AI Large Model ("Lingjue")</b> for construction machinery.
+    <ul>
+        <li data-i18n="projects.netease_li1a">Incorporated <b>VLA (Vision-Language-Action)</b> architecture and Transformer sequence modeling for direct multi-modal input to action prediction.</li>
+        <li data-i18n="projects.netease_li1b">Combined <b>Diffusion Policy</b> with flow matching to achieve <b>L4-level autonomous operation</b> (e.g., automatic loading) in complex open-pit mine scenarios, realizing zero-intervention operation in a significant portion of the duty cycle.</li>
+        <li data-i18n="projects.netease_li1c">Achieved <b>cross-brand generalization</b> (software-defined hardware) and overcame nonlinear control challenges in hydraulic systems.</li>
+    </ul>
+</li>
+<li data-i18n-html="projects.netease_li2"><b>Large-Scale Data Closed-Loop &amp; Training Platform:</b> Built a comprehensive embodied intelligence training framework and data closed-loop system.
+    <ul>
+        <li data-i18n="projects.netease_li2a">Designed a <b>"Video &rarr; Expert &rarr; RL" three-stage training paradigm</b>.</li>
+        <li data-i18n="projects.netease_li2b">Implemented a high-efficiency data pipeline supporting <b>300TB+/month</b> of multi-modal data flow for continuous model iteration.</li>
+    </ul>
+</li>
+<li data-i18n-html="projects.netease_li3"><b>System &amp; Commercialization:</b> Developed key remote control technologies (low-latency video, data collection) and led the deployment of <b>unmanned loaders and intelligent excavators</b> (SLAM, multi-sensor fusion, planning, control) for <b>24-hour "dark site" operations</b>. Achieved significant commercial success and widespread deployment across multiple provinces in cooperation with major state-owned enterprises.</li>
 </ul>
 <p>&nbsp;</p>
-<h3>2017.07~2021.12: Fuxi AI Lab in Netease （网易伏羲实验室）</h3>
-<p>We mainly focus in landing reinforcement learning to <b>Game AI</b> and <b>agent-based Game testing</b>, more related applications are also explored, such as <b>game generation, GPU cache management</b> and so on.</p>
+<h3 data-i18n="projects.fuxi_title">2017.07~2021.12: Fuxi AI Lab in Netease （网易伏羲实验室）</h3>
+<p data-i18n-html="projects.fuxi_desc">We mainly focus in landing reinforcement learning to <b>Game AI</b> and <b>agent-based Game testing</b>, more related applications are also explored, such as <b>game generation, GPU cache management</b> and so on.</p>
 
-<h4>Game AI:
+<h4><span data-i18n="projects.game_ai_title">Game AI:</span>
 <img src="Files/Pic/game_ai.png" alt="" class="proj-img" /></h4>
 
-<h4>Game Testing:
+<h4><span data-i18n="projects.game_testing_title">Game Testing:</span>
 <img src="Files/Pic/game_testing.png" alt="" class="proj-img" /></h4>
 
-<h3>2012.07~2017.07: Kejia Project, Robotic Lab in USTC</h3>
+<h3 data-i18n="projects.kejia_title">2012.07~2017.07: Kejia Project, Robotic Lab in USTC</h3>
 
-<h4>Ke Jia Service Robot: Mapping, Localization and Navigation</h4>
-<p><a href="javascript:void(0);" onclick="openVideo('Files/Videos/kejiarobot.mp4')">[Demo Video]</a></p>
+<h4 data-i18n="projects.kejia_nav_title">Ke Jia Service Robot: Mapping, Localization and Navigation</h4>
+<p><a href="javascript:void(0);" onclick="openVideo('Files/Videos/kejiarobot.mp4')" data-i18n="projects.demo_video">[Demo Video]</a></p>
 <img src="Files/Pic/kejia_robot.png" class="proj-img" alt="The evolution of Ke Jia" />
-<p>KeJia Standard Robot Platform has been used in the annual RoboCup@Home competition since 2009 with outstanding achievements---a champion and three runners-up in the past 5 years. After the 8-year evolution through practice in competition, research and education, now the platform is suitable for both specialists and newcomers in Robotics and related fields.</p>
+<p data-i18n="projects.kejia_nav_desc">KeJia Standard Robot Platform has been used in the annual RoboCup@Home competition since 2009 with outstanding achievements---a champion and three runners-up in the past 5 years. After the 8-year evolution through practice in competition, research and education, now the platform is suitable for both specialists and newcomers in Robotics and related fields.</p>
 
-<h4>Robocup Competition: <a href="https://athome.robocup.org/">WrightEagle@Home</a></h4>
+<h4 data-i18n-html="projects.robocup_title">Robocup Competition: <a href="https://athome.robocup.org/">WrightEagle@Home</a></h4>
 
 <p>
 <script>
@@ -606,61 +624,61 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
           page.document.write(html);
      }
 </script>
-<a href="https://link.springer.com/chapter/10.1007%2F978-3-319-18615-3_11">[Technical Report]</a>
-<a href="javascript:void(0);" onclick="openVideo('Files/Videos/WEHome2014Quali.mp4')">[Demo Video]</a>
+<a href="https://link.springer.com/chapter/10.1007%2F978-3-319-18615-3_11" data-i18n="projects.tech_report">[Technical Report]</a>
+<a href="javascript:void(0);" onclick="openVideo('Files/Videos/WEHome2014Quali.mp4')" data-i18n="projects.demo_video">[Demo Video]</a>
 </p>
 
 <table class="results-table">
   <tbody>
     <tr>
-      <th>Event</th>
-      <th>Place</th>
-      <th>Award</th>
-      <th>Role</th>
+      <th data-i18n="projects.event">Event</th>
+      <th data-i18n="projects.place">Place</th>
+      <th data-i18n="projects.award">Award</th>
+      <th data-i18n="projects.role">Role</th>
     </tr>
     <tr>
       <td>RoboCup China Open@Home league 2013</td>
       <td>Hefei, China</td>
-      <td>Champion</td>
-      <td>Major</td>
+      <td data-i18n="projects.champion">Champion</td>
+      <td data-i18n="projects.major">Major</td>
     </tr>
     <tr>
       <td>RoboCup@Home league 2014</td>
       <td>Joao Pessoa, Brazil</td>
-      <td>Champion</td>
-      <td>Major</td>
+      <td data-i18n="projects.champion">Champion</td>
+      <td data-i18n="projects.major">Major</td>
     </tr>
     <tr>
       <td>RoboCup China Open@Robot Benchmarking 2015</td>
       <td>Guiyang, China</td>
-      <td>Champion</td>
-      <td>Leader</td>
+      <td data-i18n="projects.champion">Champion</td>
+      <td data-i18n="projects.leader">Leader</td>
     </tr>
     <tr>
       <td>RoboCup@Benchmarking Service Robots 2015</td>
       <td>Hefei, China</td>
-      <td>Champion</td>
-      <td>Leader</td>
+      <td data-i18n="projects.champion">Champion</td>
+      <td data-i18n="projects.leader">Leader</td>
     </tr>
   </tbody>
 </table>
 
 
-<h4>Guide Robot in Shopping Mall</h4>
+<h4 data-i18n="projects.mall_guide_title">Guide Robot in Shopping Mall</h4>
 
-<p><a href="https://journals.sagepub.com/doi/full/10.1177/1729881417703569">[Technical Report]</a>
-  <a href="javascript:void(0);" onclick="openVideo('Files/Videos/shoppingmallguide.mp4')">[Demo Video]</a>
+<p><a href="https://journals.sagepub.com/doi/full/10.1177/1729881417703569" data-i18n="projects.tech_report">[Technical Report]</a>
+  <a href="javascript:void(0);" onclick="openVideo('Files/Videos/shoppingmallguide.mp4')" data-i18n="projects.demo_video">[Demo Video]</a>
 </p>
 <p>
   <img src="Files/Pic/shopping_mall.jpg" class="proj-img" alt="Kejia shopping mall robot" />
 </p>
-<p>Kejia shopping mall robot is adapted from Kejia service robot platform, it was deployed in a large modern shopping mall in Hefei with the size of 30,000 m2 and more than 160 shops. Field trials were conducted for 40 days, which is probably the first shopping mall guide robot in China.</p>
+<p data-i18n="projects.mall_desc">Kejia shopping mall robot is adapted from Kejia service robot platform, it was deployed in a large modern shopping mall in Hefei with the size of 30,000 m2 and more than 160 shops. Field trials were conducted for 40 days, which is probably the first shopping mall guide robot in China.</p>
 
-<h4>Motion Capture System for Robot</h4>
+<h4 data-i18n="projects.mcs_title">Motion Capture System for Robot</h4>
 
 <img src="Files/Pic/mcs.jpg" class="proj-img" alt="motion caption system for robot" />
 
-<p>
+<p data-i18n-html="projects.mcs_desc">
   For Robot Testing:<br />
   - <a href="https://link.springer.com/chapter/10.1007/978-3-319-65298-6_25">Cleaning Robots Test</a><br />
   - <a href="http://roboticsbase.ustc.edu.cn/">Anhui Robot Technology Standard Innovation Base</a><br />
@@ -668,34 +686,34 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
   - <a href="https://wufeng02.github.io/doc/pdf/ZCWicira17.pdf">General Batch-Calibration Framework</a><br />
 </p>
 
-<h4>Large Scale SLAM for Indoor and Outdoor</h4>
-<a href="https://ieeexplore.ieee.org/abstract/document/7251518">[Technical Report]</a><br/>
+<h4 data-i18n="projects.slam_title">Large Scale SLAM for Indoor and Outdoor</h4>
+<a href="https://ieeexplore.ieee.org/abstract/document/7251518" data-i18n="projects.tech_report">[Technical Report]</a><br/>
 <img src="Files/Pic/indoormap.png" class="proj-img" alt="Quadtree slam for large shopping mall" />
 
 
-<A NAME="Services"><h2>Services</h2></A>
+<A NAME="Services"><h2 data-i18n="services.title">Services</h2></A>
 
 <ul>
-<li>Executive Committee Member, <b>CCF Intelligent Robotics Professional Committee</b>, 2024-Present</li>
-<li>Enterprise Mentor, <b>School of Data Science, USTC</b>, 2021-Present</li>
-<li>Program Committee Member / Reviewer for Top AI &amp; Robotics Conferences (<b>NeurIPS, ICML, AAAI, IJCAI, ICRA, IROS</b>)</li>
+<li data-i18n-html="services.li1">Executive Committee Member, <b>CCF Intelligent Robotics Professional Committee</b>, 2024-Present</li>
+<li data-i18n-html="services.li2">Enterprise Mentor, <b>School of Data Science, USTC</b>, 2021-Present</li>
+<li data-i18n-html="services.li3">Program Committee Member / Reviewer for Top AI &amp; Robotics Conferences (<b>NeurIPS, ICML, AAAI, IJCAI, ICRA, IROS</b>)</li>
 </ul>
 
 
-<A NAME="Awards"><h2>Awards</h2></A>
+<A NAME="Awards"><h2 data-i18n="awards.title">Awards</h2></A>
 <ul>
-<li><b>Hangzhou High-Level Talent (Category C)</b>, 2025</li>
-<li><b>Gold Award (1st Place)</b>, Global Digital Trade Innovation Competition, 2025</li>
-<li><b>Top 10 Youth Science and Technology Talents</b>, Binjiang District, 2024</li>
-<li><b>Champion</b>, ICRA RoboDepth Competition, 2023</li>
-<li><b>Global 2nd Place</b>, Google DeepMind Football AI Competition, 2020</li>
-<li><b>Best Paper Award</b>, ASE, 2019</li>
-<li><b>Champion</b> of the Robocup@Benchmarking Service Robots, 2015</li>
-<li><b>Champion</b> of the World Robocup@Home Competition, Brazil (The first Asian champion), 2014</li>
-<li><b>Outstanding Undergraduate</b>, China University of Petroleum, 2012</li>
-<li><b>First Prize</b> of Province in the competition of "FreeScale Smart Car", 2011</li>
-<li><b>National Scholarship</b>, Ministry of Education, 2011</li>
-<li><b>First-class scholarship</b>, 2009&amp;2010</li>
+<li data-i18n-html="awards.li1"><b>Hangzhou High-Level Talent (Category C)</b>, 2025</li>
+<li data-i18n-html="awards.li2"><b>Gold Award (1st Place)</b>, Global Digital Trade Innovation Competition, 2025</li>
+<li data-i18n-html="awards.li3"><b>Top 10 Youth Science and Technology Talents</b>, Binjiang District, 2024</li>
+<li data-i18n-html="awards.li4"><b>Champion</b>, ICRA RoboDepth Competition, 2023</li>
+<li data-i18n-html="awards.li5"><b>Global 2nd Place</b>, Google DeepMind Football AI Competition, 2020</li>
+<li data-i18n-html="awards.li6"><b>Best Paper Award</b>, ASE, 2019</li>
+<li data-i18n-html="awards.li7"><b>Champion</b> of the Robocup@Benchmarking Service Robots, 2015</li>
+<li data-i18n-html="awards.li8"><b>Champion</b> of the World Robocup@Home Competition, Brazil (The first Asian champion), 2014</li>
+<li data-i18n-html="awards.li9"><b>Outstanding Undergraduate</b>, China University of Petroleum, 2012</li>
+<li data-i18n-html="awards.li10"><b>First Prize</b> of Province in the competition of "FreeScale Smart Car", 2011</li>
+<li data-i18n-html="awards.li11"><b>National Scholarship</b>, Ministry of Education, 2011</li>
+<li data-i18n-html="awards.li12"><b>First-class scholarship</b>, 2009&amp;2010</li>
 </ul>
 
 
@@ -711,8 +729,8 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
     <img src="https://s05.flagcounter.com/count/3i2n/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0">
   </a>
   <div class="footer-text">
-    Updating time: 2025.12.15<br>
-    <a href="https://beian.miit.gov.cn/" target="_blank">备案号:浙ICP备2023022379号-1</a>
+    <span data-i18n="footer.update">Updating time</span>: 2025.12.15<br>
+    <a href="https://beian.miit.gov.cn/" target="_blank" data-i18n="footer.beian">备案号:浙ICP备2023022379号-1</a>
   </div>
 </div>
 
@@ -722,5 +740,307 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
 </p>
 </div>
 </div>
+
+<script>
+/* ===== i18n: Internationalization ===== */
+const translations = {
+    en: {
+        'nav.news': 'News',
+        'nav.interest': 'Research Interest',
+        'nav.education': 'Education',
+        'nav.publications': 'Publications',
+        'nav.projects': 'Projects',
+        'nav.services': 'Services',
+        'nav.awards': 'Awards',
+
+        'header.title': 'Leader of Robotic Algorithm Department',
+        'header.affiliation': 'Fuxi Robotic in Netease（网易伏羲机器人）',
+        'header.meta': 'Member of CCF Robotics Committee | Hangzhou High-Level Talent (Category C)',
+        'header.location': 'Location: Netease Building, Wangshang Road 559, Binjiang District, Hangzhou, China',
+        'header.email_label': 'Email',
+
+        'news.title': 'News',
+        'news.toggle_more': 'Show more news ▾',
+        'news.toggle_less': 'Show less news ▴',
+
+        'interest.title': 'Research Interest',
+        'interest.intro': 'My research interests lie at the intersection of <b>Robotics, Reinforcement Learning, and Embodied AI</b>. I am dedicated to building intelligent systems that can perceive, reason, and act in complex real-world environments.',
+        'interest.embodied_title': '<b>Embodied AI &amp; Robotics (Current Focus)</b>',
+        'interest.embodied_desc': 'Currently, I am leading the research on embodied intelligence for construction machinery and general-purpose robots, focusing on end-to-end learning and large-scale data-driven approaches.',
+        'interest.embodied_li1': '<b>Embodied Foundation Models:</b> Vision-Language-Action (VLA) models, Diffusion Policy, and End-to-End (Sensor-to-Control) learning.',
+        'interest.embodied_li2': '<b>Sim2Real Transfer:</b> Bridging the reality gap via domain randomization, system identification, and residual policies.',
+        'interest.embodied_li3': '<b>Data-Driven Robotics:</b> Large-scale data closed-loop systems, imitation learning from expert demonstrations, and human-in-the-loop learning.',
+        'interest.embodied_li4': '<b>Robotic Systems:</b> Teleoperation, SLAM, multi-sensor fusion, and robust control for unmanned operation.',
+        'interest.drl_title': '<b>Deep Reinforcement Learning &amp; Game AI</b>',
+        'interest.drl_desc': 'Previously at Fuxi AI Lab, I led the Game AI research, focusing on applying Deep Reinforcement Learning (DRL) to complex game environments and building large-scale distributed training frameworks.',
+        'interest.drl_li1': '<b>Deep Reinforcement Learning:</b> High-efficient, transferable, and explainable DRL; Distributed reinforcement learning frameworks.',
+        'interest.drl_li2': '<b>Multi-Agent Learning:</b> Cooperation and competition in large-scale multi-agent environments; Population-based training (PBT).',
+        'interest.drl_li3': '<b>Game AI Applications:</b> Automated game testing, intelligent NPC behaviors, and procedural content generation.',
+        'interest.service_title': '<b>Service Robots (Ph.D. Research)</b>',
+        'interest.service_desc': 'During my graduate studies at USTC, I worked on the KeJia service robot project, focusing on the full stack of autonomous navigation — from large-scale mapping and robust localization to human-aware planning and real-world deployment in public environments.',
+        'interest.service_li1': '<b>Large-Scale SLAM:</b> Probabilistic quadtree map representation with Rao-Blackwellized particle filter SLAM, reducing memory by ~71% for large-scale environments (validated up to 23,700 m²).',
+        'interest.service_li2': '<b>Robust Localization:</b> Strategy-switching Monte Carlo Localization adaptive to crowded scenes, with odometry calibration via motion capture (closed-loop error &lt; 2.5%).',
+        'interest.service_li3': '<b>Human-Aware Navigation:</b> Three-layer planning with human-aware DWA fusing pedestrian prediction, enabling safe navigation in dense crowds.',
+        'interest.service_li4': '<b>Integrated Service Robot System:</b> Deployment of KeJia as China\'s first shopping mall guide robot (40-day field trial); RoboCup@Home 2014 champion (first Asian champion) with integrated task planning and multi-modal interaction.',
+
+        'education.title': 'Education',
+        'education.phd_postdoc': 'Postdoc in Control Science and Engineering, <a href="http://www.cse.zju.edu.cn/english/">Zhejiang University (ZJU)</a>',
+        'education.phd_postdoc_sup': 'Supervisor: Prof. <a href="https://person.zju.edu.cn/rongxiong#0">Rong Xiong</a>',
+        'education.phd': 'Ph.D in <a href="https://ai.ustc.edu.cn/main.htm">Robotics Lab</a>, University of Science and Technology of China(USTC)',
+        'education.phd_sup': 'Supervisor: Prof. <a href="https://cs.ustc.edu.cn/_t1744/2020/0828/c23235a460075/page.psp">Xiaoping Chen</a>',
+        'education.be': 'B.E. in Computer Science, China University of Petroleum (UPC)',
+
+        'publications.title': 'Publications',
+        'publications.intro': 'Some interested papers are listed, visit <a href="https://scholar.google.com/citations?user=SSBrkpMAAAAJ&hl=en" target="_blank">Google Scholar</a> for completed publications.',
+
+        'projects.title': 'Projects',
+        'projects.netease_title': '2021.10~Present: Fuxi Robotic in Netease（网易伏羲机器人）',
+        'projects.netease_role': '<strong>Role: Head of Robotic Algorithms | General Manager &amp; CTO of Netease Lingdong</strong>',
+        'projects.netease_desc': 'Responsible for the R&amp;D of embodied intelligence algorithms and systems for construction machinery, covering teleoperation, semi-automatic collaboration, unmanned operation, and multi-machine coordinated scheduling.',
+        'projects.product_home': '[Product Homepage]',
+        'projects.loader_demo': '[Loader Demo Video]',
+        'projects.excavator_demo': '[Excavator Demo Video]',
+        'projects.netease_li1': '<b>Advanced Embodied AI Models (VLA/Diffusion Policy):</b> Led the development of an industry-first <b>End-to-End (Sensor-to-Control) Embodied AI Large Model ("Lingjue")</b> for construction machinery.',
+        'projects.netease_li1a': 'Incorporated <b>VLA (Vision-Language-Action)</b> architecture and Transformer sequence modeling for direct multi-modal input to action prediction.',
+        'projects.netease_li1b': 'Combined <b>Diffusion Policy</b> with flow matching to achieve <b>L4-level autonomous operation</b> (e.g., automatic loading) in complex open-pit mine scenarios, realizing zero-intervention operation in a significant portion of the duty cycle.',
+        'projects.netease_li1c': 'Achieved <b>cross-brand generalization</b> (software-defined hardware) and overcame nonlinear control challenges in hydraulic systems.',
+        'projects.netease_li2': '<b>Large-Scale Data Closed-Loop &amp; Training Platform:</b> Built a comprehensive embodied intelligence training framework and data closed-loop system.',
+        'projects.netease_li2a': 'Designed a <b>"Video &rarr; Expert &rarr; RL" three-stage training paradigm</b>.',
+        'projects.netease_li2b': 'Implemented a high-efficiency data pipeline supporting <b>300TB+/month</b> of multi-modal data flow for continuous model iteration.',
+        'projects.netease_li3': '<b>System &amp; Commercialization:</b> Developed key remote control technologies (low-latency video, data collection) and led the deployment of <b>unmanned loaders and intelligent excavators</b> (SLAM, multi-sensor fusion, planning, control) for <b>24-hour "dark site" operations</b>. Achieved significant commercial success and widespread deployment across multiple provinces in cooperation with major state-owned enterprises.',
+        'projects.fuxi_title': '2017.07~2021.12: Fuxi AI Lab in Netease （网易伏羲实验室）',
+        'projects.fuxi_desc': 'We mainly focus in landing reinforcement learning to <b>Game AI</b> and <b>agent-based Game testing</b>, more related applications are also explored, such as <b>game generation, GPU cache management</b> and so on.',
+        'projects.game_ai_title': 'Game AI:',
+        'projects.game_testing_title': 'Game Testing:',
+        'projects.kejia_title': '2012.07~2017.07: Kejia Project, Robotic Lab in USTC',
+        'projects.kejia_nav_title': 'Ke Jia Service Robot: Mapping, Localization and Navigation',
+        'projects.demo_video': '[Demo Video]',
+        'projects.tech_report': '[Technical Report]',
+        'projects.kejia_nav_desc': 'KeJia Standard Robot Platform has been used in the annual RoboCup@Home competition since 2009 with outstanding achievements---a champion and three runners-up in the past 5 years. After the 8-year evolution through practice in competition, research and education, now the platform is suitable for both specialists and newcomers in Robotics and related fields.',
+        'projects.robocup_title': 'Robocup Competition: <a href="https://athome.robocup.org/">WrightEagle@Home</a>',
+        'projects.event': 'Event',
+        'projects.place': 'Place',
+        'projects.award': 'Award',
+        'projects.role': 'Role',
+        'projects.champion': 'Champion',
+        'projects.major': 'Major',
+        'projects.leader': 'Leader',
+        'projects.mall_guide_title': 'Guide Robot in Shopping Mall',
+        'projects.mall_desc': 'Kejia shopping mall robot is adapted from Kejia service robot platform, it was deployed in a large modern shopping mall in Hefei with the size of 30,000 m2 and more than 160 shops. Field trials were conducted for 40 days, which is probably the first shopping mall guide robot in China.',
+        'projects.mcs_title': 'Motion Capture System for Robot',
+        'projects.mcs_desc': '\n  For Robot Testing:<br />\n  - <a href="https://link.springer.com/chapter/10.1007/978-3-319-65298-6_25">Cleaning Robots Test</a><br />\n  - <a href="http://roboticsbase.ustc.edu.cn/">Anhui Robot Technology Standard Innovation Base</a><br />\n  For Robot Calibration:<br />\n  - <a href="https://wufeng02.github.io/doc/pdf/ZCWicira17.pdf">General Batch-Calibration Framework</a><br />\n',
+        'projects.slam_title': 'Large Scale SLAM for Indoor and Outdoor',
+
+        'services.title': 'Services',
+        'services.li1': 'Executive Committee Member, <b>CCF Intelligent Robotics Professional Committee</b>, 2024-Present',
+        'services.li2': 'Enterprise Mentor, <b>School of Data Science, USTC</b>, 2021-Present',
+        'services.li3': 'Program Committee Member / Reviewer for Top AI &amp; Robotics Conferences (<b>NeurIPS, ICML, AAAI, IJCAI, ICRA, IROS</b>)',
+
+        'awards.title': 'Awards',
+        'awards.li1': '<b>Hangzhou High-Level Talent (Category C)</b>, 2025',
+        'awards.li2': '<b>Gold Award (1st Place)</b>, Global Digital Trade Innovation Competition, 2025',
+        'awards.li3': '<b>Top 10 Youth Science and Technology Talents</b>, Binjiang District, 2024',
+        'awards.li4': '<b>Champion</b>, ICRA RoboDepth Competition, 2023',
+        'awards.li5': '<b>Global 2nd Place</b>, Google DeepMind Football AI Competition, 2020',
+        'awards.li6': '<b>Best Paper Award</b>, ASE, 2019',
+        'awards.li7': '<b>Champion</b> of the Robocup@Benchmarking Service Robots, 2015',
+        'awards.li8': '<b>Champion</b> of the World Robocup@Home Competition, Brazil (The first Asian champion), 2014',
+        'awards.li9': '<b>Outstanding Undergraduate</b>, China University of Petroleum, 2012',
+        'awards.li10': '<b>First Prize</b> of Province in the competition of "FreeScale Smart Car", 2011',
+        'awards.li11': '<b>National Scholarship</b>, Ministry of Education, 2011',
+        'awards.li12': '<b>First-class scholarship</b>, 2009&amp;2010',
+
+        'footer.update': 'Updating time',
+        'footer.beian': '备案号:浙ICP备2023022379号-1'
+    },
+    zh: {
+        'nav.news': '最新动态',
+        'nav.interest': '研究方向',
+        'nav.education': '教育背景',
+        'nav.publications': '论文发表',
+        'nav.projects': '项目经历',
+        'nav.services': '学术服务',
+        'nav.awards': '获奖荣誉',
+
+        'header.title': '机器人算法部负责人',
+        'header.affiliation': '网易伏羲机器人',
+        'header.meta': 'CCF 智能机器人专委会 | 杭州市高层次人才（C类）',
+        'header.location': '地址：浙江省杭州市滨江区网商路559号网易大厦',
+        'header.email_label': '邮箱',
+
+        'news.title': '最新动态',
+        'news.toggle_more': '展开更多 ▾',
+        'news.toggle_less': '收起 ▴',
+
+        'interest.title': '研究方向',
+        'interest.intro': '我的研究兴趣集中在<b>机器人、强化学习与具身智能</b>的交叉领域，致力于构建能够在复杂真实环境中感知、推理和行动的智能系统。',
+        'interest.embodied_title': '<b>具身智能与机器人（当前重点）</b>',
+        'interest.embodied_desc': '目前，我正在主导工程机械和通用机器人的具身智能研究，聚焦端到端学习和大规模数据驱动方法。',
+        'interest.embodied_li1': '<b>具身基础模型：</b>视觉-语言-动作（VLA）模型、扩散策略及端到端（从传感到控制）学习。',
+        'interest.embodied_li2': '<b>Sim2Real 迁移：</b>通过域随机化、系统辨识和残差策略弥合虚实差距。',
+        'interest.embodied_li3': '<b>数据驱动机器人：</b>大规模数据闭环系统、专家示教模仿学习及人在回路学习。',
+        'interest.embodied_li4': '<b>机器人系统：</b>遥操作、SLAM、多传感器融合及无人作业的鲁棒控制。',
+        'interest.drl_title': '<b>深度强化学习与游戏 AI</b>',
+        'interest.drl_desc': '此前在伏羲 AI 实验室，我主导游戏 AI 研究，聚焦将深度强化学习（DRL）应用于复杂游戏环境，并构建大规模分布式训练框架。',
+        'interest.drl_li1': '<b>深度强化学习：</b>高效、可迁移、可解释的 DRL；分布式强化学习框架。',
+        'interest.drl_li2': '<b>多智能体学习：</b>大规模多智能体环境中的合作与竞争；基于种群的训练（PBT）。',
+        'interest.drl_li3': '<b>游戏 AI 应用：</b>自动化游戏测试、智能 NPC 行为及程序化内容生成。',
+        'interest.service_title': '<b>服务机器人（博士研究）</b>',
+        'interest.service_desc': '在中国科学技术大学读博期间，我参与了"可佳"服务机器人项目，专注于自主导航的全栈研究——从大规模建图与鲁棒定位，到人群感知规划与公共环境中的真实部署。',
+        'interest.service_li1': '<b>大规模 SLAM：</b>基于概率四叉树地图表示与 Rao-Blackwellized 粒子滤波 SLAM，大规模环境下内存降低约 71%（在 23,700 m² 环境中验证）。',
+        'interest.service_li2': '<b>鲁棒定位：</b>策略切换蒙特卡洛定位，自适应拥挤场景，结合动作捕捉系统标定里程计（闭环误差 &lt; 2.5%）。',
+        'interest.service_li3': '<b>人群感知导航：</b>三层规划架构，结合行人感知 DWA 融合行人预测，实现密集人群中的安全导航。',
+        'interest.service_li4': '<b>集成服务机器人系统：</b>可佳作为中国首个商场导购机器人的部署（40 天实地测试）；RoboCup@Home 2014 冠军（首个亚洲冠军），集成任务规划与多模态人机交互。',
+
+        'education.title': '教育背景',
+        'education.phd_postdoc': '控制科学与工程博士后，<a href="http://www.cse.zju.edu.cn/english/">浙江大学（ZJU）</a>',
+        'education.phd_postdoc_sup': '导师：<a href="https://person.zju.edu.cn/rongxiong#0">熊蓉</a> 教授',
+        'education.phd': '博士，<a href="https://ai.ustc.edu.cn/main.htm">机器人实验室</a>，中国科学技术大学（USTC）',
+        'education.phd_sup': '导师：<a href="https://cs.ustc.edu.cn/_t1744/2020/0828/c23235a460075/page.psp">陈小平</a> 教授',
+        'education.be': '工学学士，计算机科学，中国石油大学（华东）',
+
+        'publications.title': '论文发表',
+        'publications.intro': '以下列出部分代表性论文，完整论文列表请访问 <a href="https://scholar.google.com/citations?user=SSBrkpMAAAAJ&hl=en" target="_blank">Google Scholar</a>。',
+
+        'projects.title': '项目经历',
+        'projects.netease_title': '2021.10~至今：网易伏羲机器人',
+        'projects.netease_role': '<strong>职务：机器人算法负责人 | 网易灵动总经理兼 CTO</strong>',
+        'projects.netease_desc': '负责工程机械具身智能算法与系统的研发，涵盖遥操作、半自动协同、无人作业及多机协同调度。',
+        'projects.product_home': '[产品主页]',
+        'projects.loader_demo': '[装载机演示视频]',
+        'projects.excavator_demo': '[挖掘机演示视频]',
+        'projects.netease_li1': '<b>先进具身 AI 模型（VLA/扩散策略）：</b>主导研发了业内首个面向工程机械的<b>端到端（从传感到控制）具身 AI 大模型（"灵掘"）</b>。',
+        'projects.netease_li1a': '引入 <b>VLA（视觉-语言-动作）</b>架构和 Transformer 序列建模，实现多模态输入到动作预测的直接映射。',
+        'projects.netease_li1b': '将<b>扩散策略</b>与流匹配结合，在复杂露天矿山场景下实现 <b>L4 级自主作业</b>（如自动装载），在作业循环的相当比例中实现零干预运行。',
+        'projects.netease_li1c': '实现<b>跨品牌泛化</b>（软件定义硬件），克服液压系统的非线性控制挑战。',
+        'projects.netease_li2': '<b>大规模数据闭环与训练平台：</b>构建了完整的具身智能训练框架和数据闭环系统。',
+        'projects.netease_li2a': '设计了 <b>"视频→专家→RL"三阶段训练范式</b>。',
+        'projects.netease_li2b': '实现了支持 <b>300TB+/月</b>多模态数据流的高效数据管线，用于持续模型迭代。',
+        'projects.netease_li3': '<b>系统与商业化：</b>开发了关键遥控技术（低延迟视频、数据采集），主导<b>无人装载机和智能挖掘机</b>（SLAM、多传感器融合、规划、控制）的部署，实现<b>24 小时"黑灯工地"作业</b>。与大型国企合作，在多省实现大规模商业化部署。',
+        'projects.fuxi_title': '2017.07~2021.12：网易伏羲实验室',
+        'projects.fuxi_desc': '主要聚焦将强化学习落地于<b>游戏 AI</b>和<b>基于智能体的游戏测试</b>，同时探索更多相关应用，如<b>游戏内容生成、GPU 缓存管理</b>等。',
+        'projects.game_ai_title': '游戏 AI：',
+        'projects.game_testing_title': '游戏测试：',
+        'projects.kejia_title': '2012.07~2017.07：可佳项目，中国科学技术大学机器人实验室',
+        'projects.kejia_nav_title': '可佳服务机器人：建图、定位与导航',
+        'projects.demo_video': '[演示视频]',
+        'projects.tech_report': '[技术报告]',
+        'projects.kejia_nav_desc': '可佳标准机器人平台自 2009 年起用于年度 RoboCup@Home 竞赛，成绩斐然——过去 5 年中获一次冠军和三次亚军。经过 8 年在竞赛、科研和教育中的实践演化，该平台现已适用于机器人及相关领域的专业用户和新手。',
+        'projects.robocup_title': 'RoboCup 竞赛：<a href="https://athome.robocup.org/">WrightEagle@Home</a>',
+        'projects.event': '赛事',
+        'projects.place': '地点',
+        'projects.award': '成绩',
+        'projects.role': '角色',
+        'projects.champion': '冠军',
+        'projects.major': '主力',
+        'projects.leader': '队长',
+        'projects.mall_guide_title': '商场导购机器人',
+        'projects.mall_desc': '可佳商场导购机器人基于可佳服务机器人平台改造，部署于合肥一家面积 30,000 平方米、含 160 余家商铺的大型现代化商场。实地测试持续 40 天，可能是中国首个商场导购机器人。',
+        'projects.mcs_title': '机器人动作捕捉系统',
+        'projects.mcs_desc': '\n  机器人测试：<br />\n  - <a href="https://link.springer.com/chapter/10.1007/978-3-319-65298-6_25">清洁机器人测试</a><br />\n  - <a href="http://roboticsbase.ustc.edu.cn/">安徽省机器人技术标准创新基地</a><br />\n  机器人标定：<br />\n  - <a href="https://wufeng02.github.io/doc/pdf/ZCWicira17.pdf">通用批量标定框架</a><br />\n',
+        'projects.slam_title': '室内外大规模 SLAM',
+
+        'services.title': '学术服务',
+        'services.li1': 'CCF 智能机器人专业委员会，常委，2024年至今',
+        'services.li2': '中国科学技术大学数据科学学院，企业导师，2021年至今',
+        'services.li3': '顶级 AI 与机器人会议程序委员会成员 / 审稿人（<b>NeurIPS, ICML, AAAI, IJCAI, ICRA, IROS</b>）',
+
+        'awards.title': '获奖荣誉',
+        'awards.li1': '<b>杭州市高层次人才（C类）</b>，2025',
+        'awards.li2': '<b>金奖（第一名）</b>，全球数字贸易创新大赛，2025',
+        'awards.li3': '<b>滨江区十大青年科技人才</b>，2024',
+        'awards.li4': '<b>冠军</b>，ICRA RoboDepth 竞赛，2023',
+        'awards.li5': '<b>全球亚军</b>，Google DeepMind 足球 AI 竞赛，2020',
+        'awards.li6': '<b>最佳论文奖</b>，ASE，2019',
+        'awards.li7': '<b>冠军</b>，RoboCup@服务机器人基准测试，2015',
+        'awards.li8': '<b>冠军</b>，RoboCup@Home 世界赛，巴西（首个亚洲冠军），2014',
+        'awards.li9': '<b>优秀本科毕业生</b>，中国石油大学（华东），2012',
+        'awards.li10': '<b>省级一等奖</b>，"飞思卡尔"智能车竞赛，2011',
+        'awards.li11': '<b>国家奖学金</b>，教育部，2011',
+        'awards.li12': '<b>一等奖学金</b>，2009&amp;2010',
+
+        'footer.update': '更新时间',
+        'footer.beian': '备案号:浙ICP备2023022379号-1'
+    }
+};
+
+const I18N_KEY = 'yf-lang';
+let currentLang = 'en';
+
+function t(key) {
+    var dict = translations[currentLang] || translations.en;
+    if (dict && Object.prototype.hasOwnProperty.call(dict, key)) return dict[key];
+    if (translations.en && Object.prototype.hasOwnProperty.call(translations.en, key)) return translations.en[key];
+    return key;
+}
+
+function applyLang(lang) {
+    currentLang = (lang === 'zh') ? 'zh' : 'en';
+    document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        el.textContent = t(key);
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n-html');
+        el.innerHTML = t(key);
+    });
+
+    var btn = document.querySelector('.lang-toggle');
+    if (btn) {
+        btn.textContent = (currentLang === 'zh') ? 'EN' : '中';
+    }
+
+    var newsBtn = document.querySelector('.news-toggle');
+    if (newsBtn) {
+        var more = document.getElementById('news-more');
+        if (more && more.classList.contains('news-collapsed')) {
+            newsBtn.innerHTML = (currentLang === 'zh') ? '展开更多 &#9662;' : 'Show more news &#9662;';
+        } else {
+            newsBtn.innerHTML = (currentLang === 'zh') ? '收起 &#9652;' : 'Show less news &#9652;';
+        }
+    }
+
+    syncUrlLang(currentLang);
+}
+
+function toggleLang() {
+    var next = (currentLang === 'zh') ? 'en' : 'zh';
+    applyLang(next);
+    try { localStorage.setItem(I18N_KEY, next); } catch(e) {}
+}
+
+function readUrlLang() {
+    try {
+        var params = new URLSearchParams(window.location.search);
+        var v = (params.get('lang') || '').toLowerCase();
+        if (v === 'zh' || v === 'cn' || v === 'zh-cn') return 'zh';
+        if (v === 'en') return 'en';
+    } catch(e) {}
+    return null;
+}
+
+function syncUrlLang(lang) {
+    try {
+        var url = new URL(window.location.href);
+        if (url.searchParams.get('lang') === lang) return;
+        url.searchParams.set('lang', lang);
+        history.replaceState(null, '', url.toString());
+    } catch(e) {}
+}
+
+(function initLang() {
+    var urlLang = readUrlLang();
+    var stored = null;
+    try { stored = localStorage.getItem(I18N_KEY); } catch(e) {}
+    var initial = urlLang || stored || 'en';
+    applyLang(initial);
+    if (urlLang) {
+        try { localStorage.setItem(I18N_KEY, urlLang); } catch(e) {}
+    }
+})();
+</script>
+
 </body>
 </html>
