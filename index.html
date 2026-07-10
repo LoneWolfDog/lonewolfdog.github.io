@@ -194,6 +194,104 @@
         text-decoration: underline;
     }
 
+    /* ===== Video Link Buttons ===== */
+    .video-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        text-decoration: none;
+        color: var(--color-accent);
+        background: rgba(44, 82, 130, 0.08);
+        border: 1px solid var(--color-accent);
+        border-radius: 999px;
+        padding: 5px 14px 5px 8px;
+        font-size: 13px;
+        font-weight: 600;
+        margin: 6px 6px 6px 0;
+        transition: border-color 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s, background 0.25s;
+        position: relative;
+    }
+    .video-link-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        border: 1px solid var(--color-accent);
+        flex-shrink: 0;
+        transition: background 0.25s, transform 0.25s;
+    }
+    .video-link-icon::before {
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 6px solid var(--color-accent);
+        margin-left: 2px;
+    }
+    .video-link:hover {
+        color: #fff;
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(26, 54, 93, 0.22);
+        text-decoration: none;
+    }
+    .video-link:hover .video-link-icon {
+        transform: scale(1.08);
+    }
+    .video-link::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        box-shadow: 0 0 4px 1px rgba(44, 82, 130, 0.12);
+        animation: vlink-breathe 2.2s ease-in-out infinite;
+        pointer-events: none;
+    }
+    .video-link.off-screen::after,
+    .video-link.off-screen .video-link-text::after {
+        animation-play-state: paused;
+    }
+    @keyframes vlink-breathe {
+        0%, 100% { box-shadow: 0 0 4px 1px rgba(44, 82, 130, 0.12); }
+        50%      { box-shadow: 0 0 18px 3px rgba(44, 82, 130, 0.50); }
+    }
+    /* Tapping finger to guide clicks */
+    .video-link-text::after {
+        content: '\1F446';
+        margin-left: 4px;
+        display: inline-block;
+        vertical-align: middle;
+        animation: finger-tap 1.4s ease-in-out infinite;
+    }
+    @keyframes finger-tap {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(3px); }
+    }
+
+    /* External link: shares the video-link button style; only the icon differs (arrow vs play) */
+    .ext-link .video-link-icon::before {
+        content: '\2197';
+        width: auto;
+        height: auto;
+        border: none;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--color-accent);
+        margin-left: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .video-link::after { animation: none; box-shadow: none; }
+        .video-link-text::after { animation: none; }
+        .video-link:hover { transform: none; }
+        .video-link:hover .video-link-icon { transform: none; }
+    }
+
     /* ===== Lists ===== */
     ul {
         padding-left: 24px;
@@ -714,9 +812,9 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
 <p data-i18n-html="projects.netease_role"><strong>Role: Head of Robotic Algorithms | General Manager &amp; CTO of Netease Lingdong</strong></p>
 <p data-i18n="projects.netease_desc">Responsible for the R&amp;D of embodied intelligence algorithms and systems for construction machinery, covering teleoperation, semi-automatic collaboration, unmanned operation, and multi-machine coordinated scheduling.</p>
 <p>
-<a href="https://lingdong.fuxi.163.com/" target="_blank" data-i18n="projects.product_home">[Product Homepage]</a>
-<a href="javascript:void(0);" onclick="openVideo('Files/Videos/zhuangzaiji.mp4')" data-i18n="projects.loader_demo">[Loader Demo Video]</a>
-<a href="javascript:void(0);" onclick="openVideo('Files/Videos/wajueji.mp4')" data-i18n="projects.excavator_demo">[Excavator Demo Video]</a>
+<a href="javascript:void(0);" onclick="openVideo('Files/Videos/zhuangzaiji.mp4')" class="video-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.loader_demo">Loader Demo Video</span></a>
+<a href="javascript:void(0);" onclick="openVideo('Files/Videos/wajueji.mp4')" class="video-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.excavator_demo">Excavator Demo Video</span></a>
+<a href="https://lingdong.fuxi.163.com/" target="_blank" class="video-link ext-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.product_home">Product Homepage</span></a>
 </p>
 <ul>
 <li data-i18n-html="projects.netease_li1"><b>Advanced Embodied AI Models (VLA/Diffusion Policy):</b> Led the development of an industry-first <b>End-to-End (Sensor-to-Control) Embodied AI Large Model ("Lingjue")</b> for construction machinery.
@@ -747,7 +845,7 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
 <h3 data-i18n="projects.kejia_title">2012.07~2017.07: Kejia Project, Robotic Lab in USTC</h3>
 
 <h4 data-i18n="projects.kejia_nav_title">Ke Jia Service Robot: Mapping, Localization and Navigation</h4>
-<p><a href="javascript:void(0);" onclick="openVideo('Files/Videos/kejiarobot.mp4')" data-i18n="projects.demo_video">[Demo Video]</a></p>
+<p><a href="javascript:void(0);" onclick="openVideo('Files/Videos/kejiarobot.mp4')" class="video-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.demo_video">Demo Video</span></a></p>
 <img src="Files/Pic/kejia_robot.png" class="proj-img" alt="The evolution of Ke Jia" />
 <p data-i18n="projects.kejia_nav_desc">KeJia Standard Robot Platform has been used in the annual RoboCup@Home competition since 2009 with outstanding achievements---a champion and three runners-up in the past 5 years. After the 8-year evolution through practice in competition, research and education, now the platform is suitable for both specialists and newcomers in Robotics and related fields.</p>
 
@@ -761,8 +859,8 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
           page.document.write(html);
      }
 </script>
-<a href="https://link.springer.com/chapter/10.1007%2F978-3-319-18615-3_11" data-i18n="projects.tech_report">[Technical Report]</a>
-<a href="javascript:void(0);" onclick="openVideo('Files/Videos/WEHome2014Quali.mp4')" data-i18n="projects.demo_video">[Demo Video]</a>
+<a href="javascript:void(0);" onclick="openVideo('Files/Videos/WEHome2014Quali.mp4')" class="video-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.demo_video">Demo Video</span></a>
+<a href="https://link.springer.com/chapter/10.1007%2F978-3-319-18615-3_11" target="_blank" class="video-link ext-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.tech_report">Technical Report</span></a>
 </p>
 
 <table class="results-table">
@@ -803,8 +901,8 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
 
 <h4 data-i18n="projects.mall_guide_title">Guide Robot in Shopping Mall</h4>
 
-<p><a href="https://journals.sagepub.com/doi/full/10.1177/1729881417703569" data-i18n="projects.tech_report">[Technical Report]</a>
-  <a href="javascript:void(0);" onclick="openVideo('Files/Videos/shoppingmallguide.mp4')" data-i18n="projects.demo_video">[Demo Video]</a>
+<p><a href="javascript:void(0);" onclick="openVideo('Files/Videos/shoppingmallguide.mp4')" class="video-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.demo_video">Demo Video</span></a>
+  <a href="https://journals.sagepub.com/doi/full/10.1177/1729881417703569" target="_blank" class="video-link ext-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.tech_report">Technical Report</span></a>
 </p>
 <p>
   <img src="Files/Pic/shopping_mall.jpg" class="proj-img" alt="Kejia shopping mall robot" />
@@ -824,7 +922,7 @@ Proceeding of the IEEE International Conference on Advanced Robotics(ICAR), 2015
 </p>
 
 <h4 data-i18n="projects.slam_title">Large Scale SLAM for Indoor and Outdoor</h4>
-<a href="https://ieeexplore.ieee.org/abstract/document/7251518" data-i18n="projects.tech_report">[Technical Report]</a><br/>
+<a href="https://ieeexplore.ieee.org/abstract/document/7251518" target="_blank" class="video-link ext-link"><span class="video-link-icon" aria-hidden="true"></span><span class="video-link-text" data-i18n="projects.tech_report">Technical Report</span></a><br/>
 <img src="Files/Pic/indoormap.png" class="proj-img" alt="Quadtree slam for large shopping mall" />
 
 
@@ -970,9 +1068,9 @@ const translations = {
         'projects.netease_title': '2021.10~Present: Fuxi Robotic in Netease（网易伏羲机器人）',
         'projects.netease_role': '<strong>Role: Head of Robotic Algorithms | General Manager &amp; CTO of Netease Lingdong</strong>',
         'projects.netease_desc': 'Responsible for the R&amp;D of embodied intelligence algorithms and systems for construction machinery, covering teleoperation, semi-automatic collaboration, unmanned operation, and multi-machine coordinated scheduling.',
-        'projects.product_home': '[Product Homepage]',
-        'projects.loader_demo': '[Loader Demo Video]',
-        'projects.excavator_demo': '[Excavator Demo Video]',
+        'projects.product_home': 'Product Homepage',
+        'projects.loader_demo': 'Loader Demo Video',
+        'projects.excavator_demo': 'Excavator Demo Video',
         'projects.netease_li1': '<b>Advanced Embodied AI Models (VLA/Diffusion Policy):</b> Led the development of an industry-first <b>End-to-End (Sensor-to-Control) Embodied AI Large Model ("Lingjue")</b> for construction machinery.',
         'projects.netease_li1a': 'Incorporated <b>VLA (Vision-Language-Action)</b> architecture and Transformer sequence modeling for direct multi-modal input to action prediction.',
         'projects.netease_li1b': 'Combined <b>Diffusion Policy</b> with flow matching to achieve <b>L4-level autonomous operation</b> (e.g., automatic loading) in complex open-pit mine scenarios, realizing zero-intervention operation in a significant portion of the duty cycle.',
@@ -987,8 +1085,8 @@ const translations = {
         'projects.game_testing_title': 'Game Testing:',
         'projects.kejia_title': '2012.07~2017.07: Kejia Project, Robotic Lab in USTC',
         'projects.kejia_nav_title': 'Ke Jia Service Robot: Mapping, Localization and Navigation',
-        'projects.demo_video': '[Demo Video]',
-        'projects.tech_report': '[Technical Report]',
+        'projects.demo_video': 'Demo Video',
+        'projects.tech_report': 'Technical Report',
         'projects.kejia_nav_desc': 'KeJia Standard Robot Platform has been used in the annual RoboCup@Home competition since 2009 with outstanding achievements---a champion and three runners-up in the past 5 years. After the 8-year evolution through practice in competition, research and education, now the platform is suitable for both specialists and newcomers in Robotics and related fields.',
         'projects.robocup_title': 'Robocup Competition: <a href="https://athome.robocup.org/">WrightEagle@Home</a>',
         'projects.event': 'Event',
@@ -1090,9 +1188,9 @@ const translations = {
         'projects.netease_title': '2021.10~至今：网易伏羲机器人',
         'projects.netease_role': '<strong>职务：机器人算法负责人 | 网易灵动总经理兼 CTO</strong>',
         'projects.netease_desc': '负责工程机械具身智能算法与系统的研发，涵盖遥操作、半自动协同、无人作业及多机协同调度。',
-        'projects.product_home': '[产品主页]',
-        'projects.loader_demo': '[装载机演示视频]',
-        'projects.excavator_demo': '[挖掘机演示视频]',
+        'projects.product_home': '产品主页',
+        'projects.loader_demo': '装载机演示视频',
+        'projects.excavator_demo': '挖掘机演示视频',
         'projects.netease_li1': '<b>先进具身 AI 模型（VLA/扩散策略）：</b>主导研发了业内首个面向工程机械的<b>端到端（从传感到控制）具身 AI 大模型（"灵掘"）</b>。',
         'projects.netease_li1a': '引入 <b>VLA（视觉-语言-动作）</b>架构和 Transformer 序列建模，实现多模态输入到动作预测的直接映射。',
         'projects.netease_li1b': '将<b>扩散策略</b>与流匹配结合，在复杂露天矿山场景下实现 <b>L4 级自主作业</b>（如自动装载），在作业循环的相当比例中实现零干预运行。',
@@ -1107,8 +1205,8 @@ const translations = {
         'projects.game_testing_title': '游戏测试：',
         'projects.kejia_title': '2012.07~2017.07：可佳项目，中国科学技术大学机器人实验室',
         'projects.kejia_nav_title': '可佳服务机器人：建图、定位与导航',
-        'projects.demo_video': '[演示视频]',
-        'projects.tech_report': '[技术报告]',
+        'projects.demo_video': '演示视频',
+        'projects.tech_report': '技术报告',
         'projects.kejia_nav_desc': '可佳标准机器人平台自 2009 年起用于年度 RoboCup@Home 竞赛，成绩斐然——过去 5 年中获一次冠军和三次亚军。经过 8 年在竞赛、科研和教育中的实践演化，该平台现已适用于机器人及相关领域的专业用户和新手。',
         'projects.robocup_title': 'RoboCup 竞赛：<a href="https://athome.robocup.org/">WrightEagle@Home</a>',
         'projects.event': '赛事',
@@ -1491,6 +1589,19 @@ function triggerKonami() {
         konamiActive = false;
     }, 5000);
 }
+
+/* ===== Video link: pause breathing glow when off-screen ===== */
+(function() {
+    var links = document.querySelectorAll('.video-link');
+    if (!links.length) return;
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            entry.target.classList.toggle('off-screen', !entry.isIntersecting);
+        });
+    }, { rootMargin: '60px' });
+    links.forEach(function(el) { io.observe(el); });
+})();
 </script>
 
 </body>
